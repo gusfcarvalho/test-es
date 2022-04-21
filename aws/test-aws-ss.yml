@@ -1,0 +1,19 @@
+apiVersion: external-secrets.io/v1beta1   
+kind: ClusterSecretStore
+metadata:
+  name: secretstore-sample
+spec:
+  provider:
+    aws:
+      service: SecretsManager
+      region: us-east-1
+      auth:
+        secretRef:
+          accessKeyIDSecretRef:
+            name: aws-secret
+            key: key
+            namespace: default
+          secretAccessKeySecretRef:
+            name: aws-secret
+            key: secret
+            namespace: default

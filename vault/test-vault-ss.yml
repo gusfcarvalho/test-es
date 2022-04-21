@@ -1,0 +1,30 @@
+ apiVersion: external-secrets.io/v1alpha1
+ kind: SecretStore
+ metadata:
+   name: vault-backend
+ spec:
+   provider:
+     vault:
+       server: "http://vault.vault:8200"
+       path: "kv"
+       version: "v2"
+       auth:
+         kubernetes:
+           mountPath: "kubernetes"
+           role: "demo-role"
+---
+ apiVersion: external-secrets.io/v1alpha1
+ kind: ExternalSecret
+ metadata:
+   name: vault-example
+ spec:
+   secretStoreRef:
+     name: vault-backend
+     kind: SecretStore
+   target:
+     name: example-sync
+   data:
+   - secretKey: foobar
+     remoteRef:
+       key: path/to/my/secret
+       property: password

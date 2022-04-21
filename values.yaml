@@ -1,0 +1,18 @@
+# imagePullSecrets:
+# - name: artifact-registry
+installCRDs: true
+image:
+  # repository: "us-central1-docker.pkg.dev/gfc-personal-use/eso-registry/eso"
+  tag: v0.5.1-15.g1296ee1.dirty
+webhook:
+  # imagePullSecrets:
+  # - name: artifact-registry
+  image:
+    # repository: "us-central1-docker.pkg.dev/gfc-personal-use/eso-registry/eso"
+    tag: v0.5.1-15.g1296ee1.dirty
+certController:
+  # imagePullSecrets:
+  # - name: artifact-registry
+  image:
+    # repository: "us-central1-docker.pkg.dev/gfc-personal-use/eso-registry/eso"
+    tag: v0.5.1-15.g1296ee1.dirty

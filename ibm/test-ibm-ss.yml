@@ -1,0 +1,13 @@
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: secretstore-sample
+spec:
+  provider:
+    ibm:
+      serviceUrl: "https://9339ec77-a90d-4e90-8ac8-6dd567dd39a6.us-east.secrets-manager.appdomain.cloud"
+      auth:
+        secretRef:
+          secretApiKeySecretRef:
+            name: ibm-secret
+            key: apiKey
