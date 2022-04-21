@@ -1,0 +1,44 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: docker-registry-template
+  namespace: default
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: secretstore-sample
+    kind: ClusterSecretStore
+  target:
+    name: docker-registry
+    creationPolicy: Owner
+    template:
+      type: kubernetes.io/dockerconfigjson
+      engineVersion: v2
+      data:
+        .dockerconfigjson: "{{ .mysecret }}"
+  data:
+    - secretKey: mysecret
+      remoteRef:
+        key: foo/broken
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: docker-registry-no-template
+  namespace: default
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: secretstore-sample
+    kind: ClusterSecretStore
+  target:
+    name: docker-registry-no-template
+    creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        .dockerconfigjson: "{{ .mysecret }}"
+  data:
+    - secretKey: mysecret
+      remoteRef:
+        key: foo/broken

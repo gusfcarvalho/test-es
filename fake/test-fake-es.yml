@@ -1,0 +1,32 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: docker-registry
+  namespace: default
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: secretstore-sample
+    kind: SecretStore
+  data:
+    - secretKey: mysecret
+      remoteRef:
+        key: /foo/bar
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: docker-registry-template
+  namespace: default
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: secretstore-sample
+    kind: SecretStore
+  target:
+    name: my-secret-name
+    creationPolicy: Merge
+  data:
+    - secretKey: mysecret
+      remoteRef:
+        key: /foo/bar
