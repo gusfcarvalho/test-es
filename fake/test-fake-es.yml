@@ -5,6 +5,8 @@ metadata:
   namespace: default
 spec:
   refreshInterval: 1m
+  target:
+   name: foobar
   secretStoreRef:
     name: secretstore-sample
     kind: SecretStore
