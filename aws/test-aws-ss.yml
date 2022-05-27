@@ -1,7 +1,7 @@
 apiVersion: external-secrets.io/v1beta1   
-kind: ClusterSecretStore
+kind: SecretStore
 metadata:
-  name: secretstore-sample
+  name: aws-invalid-secret-store
 spec:
   provider:
     aws:
@@ -17,3 +17,21 @@ spec:
             name: aws-secret
             key: secret
             namespace: default
+---
+apiVersion: external-secrets.io/v1beta1   
+kind: SecretStore
+metadata:
+  name: aws-valid-secret-store
+spec:
+  provider:
+    aws:
+      service: SecretsManager
+      region: us-east-1
+      auth:
+        secretRef:
+          accessKeyIDSecretRef:
+            name: aws-secret
+            key: key
+          secretAccessKeySecretRef:
+            name: aws-secret
+            key: secret
